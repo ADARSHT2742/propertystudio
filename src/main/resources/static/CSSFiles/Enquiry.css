@@ -1,0 +1,88 @@
+.modal {
+    top: 0;
+}
+
+.modal-dialog {
+    max-width: 90%;
+    width: 100%;
+    max-height: 90%;
+    height: 100%;
+}
+
+.vflex {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hflex {
+    display: flex;
+    justify-content: space-between;
+}
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-excel {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.btn-excel:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+.module {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.module-50 {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.module legend {
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+.enquiryTile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 16px;
+    background-color: #f9f9f9;
+}
+
+.enquiryTile .photo {
+    flex: 0 0 100px;
+    margin-right: 16px;
+}
+
+.enquiryTile .photo img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.enquiryTile .details,
+.enquiryTile .project,
+.enquiryTile .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.enquiryTile .buttons {
+    margin-left: auto;
+    text-align: right;
+}

@@ -1,0 +1,221 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f4f9;
+        }
+        .dashboard-header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            position: relative;
+            height: 40vh;
+            width: 80vw;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-header">
+        <h1>Real Estate Dashboard</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Sales by Region</h5>
+                        <div class="chart-container">
+                            <canvas id="salesByRegion"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Property Types</h5>
+                        <div class="chart-container">
+                            <canvas id="propertyTypes"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Monthly Sales</h5>
+                        <div class="chart-container">
+                            <canvas id="monthlySales"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Agent Performance</h5>
+                        <div class="chart-container">
+                            <canvas id="agentPerformance"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Revenue by Property Type</h5>
+                        <div class="chart-container">
+                            <canvas id="revenueByPropertyType"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Sales Trends</h5>
+                        <div class="chart-container">
+                            <canvas id="salesTrends"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script>
+        // Dummy data for the charts
+        const salesByRegionData = {
+            labels: ['North', 'South', 'East', 'West'],
+            datasets: [{
+                label: 'Sales',
+                data: [12, 19, 3, 5],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+            }]
+        };
+
+        const propertyTypesData = {
+            labels: ['Villas', 'Apartments', 'Townhouses', 'Commercial'],
+            datasets: [{
+                label: 'Property Types',
+                data: [7, 12, 5, 3],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+            }]
+        };
+
+        const monthlySalesData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Monthly Sales',
+                data: [65, 59, 80, 81, 56, 55],
+                backgroundColor: '#36A2EB'
+            }]
+        };
+
+        const agentPerformanceData = {
+            labels: ['Agent A', 'Agent B', 'Agent C', 'Agent D'],
+            datasets: [{
+                label: 'Performance',
+                data: [10, 14, 8, 5],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+            }]
+        };
+
+        const revenueByPropertyTypeData = {
+            labels: ['Villas', 'Apartments', 'Townhouses', 'Commercial'],
+            datasets: [{
+                label: 'Revenue',
+                data: [200000, 150000, 100000, 50000],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+            }]
+        };
+
+        const salesTrendsData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Sales Trends',
+                data: [50, 60, 70, 80, 90, 100],
+                backgroundColor: '#36A2EB',
+                borderColor: '#36A2EB',
+                fill: false
+            }]
+        };
+
+        // Creating the charts
+        window.onload = function() {
+            const ctxSalesByRegion = document.getElementById('salesByRegion').getContext('2d');
+            new Chart(ctxSalesByRegion, {
+                type: 'pie',
+                data: salesByRegionData,
+                options: {
+                    responsive: true
+                }
+            });
+
+            const ctxPropertyTypes = document.getElementById('propertyTypes').getContext('2d');
+            new Chart(ctxPropertyTypes, {
+                type: 'doughnut',
+                data: propertyTypesData,
+                options: {
+                    responsive: true
+                }
+            });
+
+            const ctxMonthlySales = document.getElementById('monthlySales').getContext('2d');
+            new Chart(ctxMonthlySales, {
+                type: 'bar',
+                data: monthlySalesData,
+                options: {
+                    responsive: true
+                }
+            });
+
+            const ctxAgentPerformance = document.getElementById('agentPerformance').getContext('2d');
+            new Chart(ctxAgentPerformance, {
+                type: 'bar',
+                data: agentPerformanceData,
+                options: {
+                    responsive: true
+                }
+            });
+
+            const ctxRevenueByPropertyType = document.getElementById('revenueByPropertyType').getContext('2d');
+            new Chart(ctxRevenueByPropertyType, {
+                type: 'pie',
+                data: revenueByPropertyTypeData,
+                options: {
+                    responsive: true
+                }
+            });
+
+            const ctxSalesTrends = document.getElementById('salesTrends').getContext('2d');
+            new Chart(ctxSalesTrends, {
+                type: 'line',
+                data: salesTrendsData,
+                options: {
+                    responsive: true
+                }
+            });
+        };
+    </script>
+</body>
+</html>
+    
